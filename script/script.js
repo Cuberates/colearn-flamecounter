@@ -5,16 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.2";
 
 const DEFAULT_ROBOT_PROFILE = "RPI_BW_001";
-/**
- * ESP_CW_001
- * RPI_BW_001
- * RPI_CL_001
- * RPI_CL_002
- * RPI_CW_001
- * RPI_HA_001
- * RPI_HW_001
- * JTSN_HW_001
- */
+
 const deviceNamePrefixMap = {
   ESP_CW_001: "CoPlay",
   RPI_BW_001: "BBC",
@@ -138,9 +129,8 @@ function openWebSocket() {
   const videoElement = document.getElementById("videoElement");
 
   const path = `pang/ws/sub?channel=instant&name=${networkConfig.channel_name}&track=video&mode=bundle`;
-  const serverURL = `${
-    window.location.protocol.replace(/:$/, "") === "https" ? "wss" : "ws"
-  }://${networkConfig.host}:${networkConfig.port}/${path}`;
+  const serverURL = `${window.location.protocol.replace(/:$/, "") === "https" ? "wss" : "ws"
+    }://${networkConfig.host}:${networkConfig.port}/${path}`;
 
   websocket = new WebSocket(serverURL);
   websocket.binaryType = "arraybuffer";
@@ -300,11 +290,11 @@ async function getVideoStream({
   return navigator.mediaDevices.getUserMedia({
     video: deviceId
       ? {
-          deviceId,
-          width: { min: 640, ideal: idealWidth },
-          height: { min: 400, ideal: idealHeight },
-          frameRate: { ideal: idealFrameRate, max: 120 },
-        }
+        deviceId,
+        width: { min: 640, ideal: idealWidth },
+        height: { min: 400, ideal: idealHeight },
+        frameRate: { ideal: idealFrameRate, max: 120 },
+      }
       : true,
   });
 }
@@ -333,7 +323,7 @@ function keepWebSocketAlive(webSocket, interval) {
     pingTimer = setInterval(sendPing, pingInterval);
   }
 
-  function handlePong() {}
+  function handlePong() { }
 
   function handleWebSocketClose() {
     clearInterval(pingTimer);
